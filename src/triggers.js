@@ -848,6 +848,11 @@ export function maybeRunTrigger(
     var { success, error } = getResponseObject(
       request,
       object => {
+        try {
+          parseObject.toJSON();
+        } catch(error) {
+          reject(error);
+        }
         logTriggerSuccessBeforeHook(
           triggerType,
           parseObject.className,
